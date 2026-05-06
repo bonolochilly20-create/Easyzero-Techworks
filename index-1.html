@@ -1,0 +1,3079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EasyZero Techworks – Smart Solutions. Scalable Impact. Built for Your Success. Web development, e-commerce, custom systems, UI/UX, SEO, and automation services in Johannesburg." />
+  <meta name="keywords" content="web development, e-commerce, custom business systems, UI/UX design, SEO, automation, Johannesburg, South Africa" />
+  <meta property="og:title" content="EasyZero Techworks | Your Partner in Digital Success" />
+  <meta property="og:description" content="Smart Solutions. Scalable Impact. Built for Your Success." />
+  <meta property="og:type" content="website" />
+  <title>EasyZero Techworks | Your Partner in Digital Success</title>
+
+  <!-- Google Fonts: Rajdhani (tech display) + Nunito Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    
+/* =====================================================
+   EasyZero Techworks — style.css
+   Tech-dark aesthetic: deep navy + electric blue
+   Fonts: Rajdhani (display) + Nunito Sans (body)
+===================================================== */
+
+/* ---- CSS Variables ---- */
+:root {
+  --navy:         #060d1f;
+  --navy-mid:     #0b1535;
+  --navy-light:   #111e40;
+  --blue-core:    #1847f0;
+  --blue-bright:  #2e6cf7;
+  --blue-glow:    #00aaff;
+  --accent:       #00d4ff;
+  --accent-light: #7dd8ff;
+  --white:        #ffffff;
+  --off-white:    #e8eef8;
+  --text-muted:   #8fa3c8;
+  --border:       rgba(46, 108, 247, 0.25);
+  --border-light: rgba(255,255,255,0.07);
+  --card-bg:      rgba(11,21,53,0.85);
+  --card-border:  rgba(46,108,247,0.3);
+  --glow:         0 0 40px rgba(0,170,255,0.2);
+  --glow-strong:  0 0 60px rgba(0,170,255,0.4);
+  --radius:       14px;
+  --radius-lg:    22px;
+  --shadow:       0 12px 40px rgba(0,0,0,0.5);
+  --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
+
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body:    'Nunito Sans', sans-serif;
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--off-white);
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none; /* custom cursor active */
+}
+
+img { max-width: 100%; display: block; }
+a  { color: inherit; text-decoration: none; }
+button { border: none; cursor: pointer; font-family: var(--font-body); }
+ul { list-style: none; }
+em { font-style: italic; }
+
+/* =====================================================
+   CUSTOM CURSOR
+===================================================== */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%,-50%);
+  transition: opacity 0.2s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 2px solid rgba(0,212,255,0.5);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.08s linear;
+}
+.cursor-ring.hovered {
+  width: 56px; height: 56px;
+  border-color: var(--accent);
+}
+
+/* =====================================================
+   PRELOADER
+===================================================== */
+#preloader {
+  position: fixed; inset: 0;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#preloader.hidden {
+  opacity: 0; visibility: hidden;
+}
+.preloader-logo { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.ez-box {
+  background: linear-gradient(135deg, var(--blue-core), var(--accent));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px;
+  letter-spacing: 2px;
+  animation: pulse-box 1.2s ease-in-out infinite;
+}
+@keyframes pulse-box {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  50%      { box-shadow: 0 0 0 20px rgba(0,212,255,0); }
+}
+.preloader-bar {
+  width: 180px; height: 3px;
+  background: var(--navy-light);
+  border-radius: 2px; overflow: hidden;
+}
+.preloader-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-core), var(--accent));
+  border-radius: 2px;
+  animation: fill-bar 1.8s ease forwards;
+}
+@keyframes fill-bar {
+  0%   { width: 0; }
+  100% { width: 100%; }
+}
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================================
+   LAYOUT UTILITIES
+===================================================== */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section {
+  padding: 110px 0;
+  position: relative;
+}
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin-bottom: 60px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn:hover::after { opacity: 1; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue-core), var(--blue-glow));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(24,71,240,0.45);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(24,71,240,0.65);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border);
+  color: var(--off-white);
+  background: transparent;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--blue-core);
+  font-weight: 700;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+.btn-outline-white {
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: #fff;
+  background: transparent;
+}
+.btn-outline-white:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.btn-lg { padding: 16px 36px; font-size: 1.08rem; }
+.btn-block { width: 100%; justify-content: center; }
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  padding: 6px 0;
+}
+#navbar.scrolled {
+  background: rgba(6,13,31,0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+}
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+/* Logo */
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.logo-box {
+  background: linear-gradient(135deg, var(--blue-core), var(--accent));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1; }
+.logo-main {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1.5px;
+}
+.logo-sub {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+}
+/* Desktop nav links */
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+  flex: 1; justify-content: center;
+}
+.nav-link {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 50%; right: 50%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: left 0.2s, right 0.2s;
+}
+.nav-link:hover { color: var(--white); }
+.nav-link:hover::after { left: 14px; right: 14px; }
+.nav-link.active { color: var(--white); }
+.nav-link.active::after { left: 14px; right: 14px; }
+
+/* Nav actions */
+.nav-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 26px; height: 2.5px;
+  background: var(--off-white);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: rgba(6,13,31,0.98);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  padding: 20px 24px 28px;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-menu ul { display: flex; flex-direction: column; gap: 4px; }
+.mob-link {
+  display: block;
+  padding: 12px 16px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.mob-link:hover { color: var(--white); background: var(--navy-light); }
+.mob-cta { margin-top: 12px; text-align: center; }
+
+/* =====================================================
+   HERO
+===================================================== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 140px 24px 80px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 70% 40%, #0c2050 0%, var(--navy) 60%);
+}
+
+/* Animated CSS grid */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(46,108,247,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,108,247,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  animation: grid-scroll 20s linear infinite;
+}
+@keyframes grid-scroll {
+  to { background-position: 60px 60px; }
+}
+
+/* Orb glows */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: rgba(24,71,240,0.18);
+  top: -100px; right: -50px;
+  animation: orb-float 8s ease-in-out infinite;
+}
+.orb-2 {
+  width: 350px; height: 350px;
+  background: rgba(0,170,255,0.12);
+  bottom: -50px; left: 20%;
+  animation: orb-float 10s ease-in-out infinite reverse;
+}
+.orb-3 {
+  width: 250px; height: 250px;
+  background: rgba(0,212,255,0.08);
+  top: 30%; left: -80px;
+  animation: orb-float 7s ease-in-out infinite 2s;
+}
+@keyframes orb-float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-30px) scale(1.05); }
+}
+
+/* Floating icons */
+.floating-icons { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.fi {
+  position: absolute;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  color: var(--accent-light);
+  background: rgba(11,21,53,0.8);
+  border: 1px solid var(--border);
+  box-shadow: var(--glow);
+  animation: float-icon 6s ease-in-out infinite;
+}
+.fi-1 { top: 20%; left: 5%;  animation-delay: 0s;    animation-duration: 7s; }
+.fi-2 { top: 60%; left: 8%;  animation-delay: 1.5s;  animation-duration: 8s; }
+.fi-3 { top: 15%; right: 6%; animation-delay: 0.8s;  animation-duration: 6.5s; }
+.fi-4 { top: 55%; right: 8%; animation-delay: 2s;    animation-duration: 9s; }
+.fi-5 { top: 80%; left: 15%; animation-delay: 0.4s;  animation-duration: 7.5s; }
+.fi-6 { top: 75%; right: 15%;animation-delay: 1.2s;  animation-duration: 8.5s; }
+@keyframes float-icon {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-18px) rotate(5deg); }
+}
+
+/* Hero layout */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Override for full-bleed positioning */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 140px;
+  padding-bottom: 100px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Hero content sits atop a flex row inside */
+.hero-content {
+  flex: 1;
+  max-width: 680px;
+  position: relative; z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  margin-bottom: 28px;
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+.hero-headline-top { color: var(--off-white); }
+.hero-headline-mid { color: var(--off-white); }
+.hero-headline-mid em { color: var(--accent); font-style: normal; }
+.hero-headline-bot strong { color: var(--white); }
+
+.hero-sub {
+  font-size: 1.12rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin-bottom: 36px;
+  line-height: 1.85;
+}
+
+.hero-actions {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin-bottom: 56px;
+}
+
+/* Stats */
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  max-width: 580px;
+}
+.stat-item {
+  flex: 1; min-width: 120px;
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding: 22px 16px;
+  gap: 4px;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-plus { font-family: var(--font-display); font-size: 1.5rem; color: var(--accent); line-height: 1; }
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.stat-divider { width: 1px; background: var(--border); }
+
+/* Hero Visual */
+.hero-visual {
+  position: absolute;
+  right: 60px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: none; /* shown on large screens via media query */
+}
+.mock-browser {
+  width: 340px;
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow), var(--glow);
+}
+.mock-bar {
+  background: var(--navy-light);
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot.red { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green { background: #28c840; }
+.mock-url {
+  flex: 1; text-align: center;
+  font-size: 0.7rem; color: var(--text-muted);
+  background: var(--navy);
+  padding: 4px 10px; border-radius: 4px;
+}
+.mock-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.mock-line { height: 10px; border-radius: 5px; background: var(--navy-light); }
+.mock-line.w80 { width: 80%; }
+.mock-line.w60 { width: 60%; }
+.mock-line.w90 { width: 90%; }
+.mock-line.w50 { width: 50%; }
+.mock-line.w70 { width: 70%; }
+.mock-line.blue { background: linear-gradient(90deg, var(--blue-core), var(--accent)); opacity: 0.7; }
+.mock-row { display: flex; gap: 8px; }
+.mock-card-sm { flex: 1; height: 50px; border-radius: 8px; background: var(--navy-light); }
+.mock-card-sm.accent { background: linear-gradient(135deg, rgba(24,71,240,0.4), rgba(0,212,255,0.2)); border: 1px solid var(--border); }
+.mock-chart { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin-top: 4px; }
+.mock-chart .bar { flex: 1; border-radius: 4px 4px 0 0; background: var(--navy-light); }
+.mock-chart .bar.accent { background: linear-gradient(to top, var(--blue-core), var(--accent)); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  width: 30px; height: 50px;
+  border: 2px solid var(--border);
+  border-radius: 15px;
+  display: flex; justify-content: center; padding-top: 8px;
+  z-index: 2;
+}
+.scroll-cue span {
+  width: 4px; height: 10px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%   { transform: translateY(0); opacity: 1; }
+  80%  { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* =====================================================
+   TRUST STRIP
+===================================================== */
+.trust-strip {
+  background: var(--navy-mid);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 18px 24px;
+  overflow: hidden;
+}
+.strip-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 12px 30px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 600; letter-spacing: 1px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.trust-item i { color: var(--accent); }
+.trust-sep { color: var(--border); font-size: 1.4rem; }
+
+/* =====================================================
+   SERVICES
+===================================================== */
+.services-section {
+  background: var(--navy);
+}
+.services-section .section-title,
+.services-section .section-label { text-align: center; }
+.services-section .section-sub { margin: 0 auto 60px; text-align: center; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+}
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow), var(--glow);
+  border-color: rgba(0,212,255,0.5);
+}
+.card-glow {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(24,71,240,0.15), transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.service-card:hover .card-glow { opacity: 0; }
+.card-number {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: rgba(46,108,247,0.12);
+  line-height: 1;
+  user-select: none;
+}
+.card-icon-wrap {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, rgba(24,71,240,0.3), rgba(0,212,255,0.15));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+.service-card:hover .card-icon-wrap {
+  background: linear-gradient(135deg, var(--blue-core), var(--blue-glow));
+  box-shadow: 0 4px 20px rgba(0,170,255,0.3);
+}
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.card-divider {
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, var(--blue-core), var(--accent));
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.card-intro {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.card-features {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 24px;
+}
+.card-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.9rem; color: var(--off-white); line-height: 1.5;
+}
+.card-features li i {
+  color: var(--accent); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0;
+}
+.card-deep {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 22px;
+}
+.card-deep p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+.card-deep p:last-child { margin-bottom: 0; }
+.card-deep strong { color: var(--accent-light); }
+.card-pricing {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  background: rgba(24,71,240,0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(24,71,240,0.2);
+}
+.pricing-label { font-size: 0.78rem; color: var(--text-muted); }
+.pricing-value { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--accent); }
+.card-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  transition: gap 0.2s, color 0.2s;
+}
+.card-cta:hover { gap: 14px; color: var(--white); }
+
+/* =====================================================
+   ABOUT
+===================================================== */
+.about-section { background: var(--navy-mid); overflow: hidden; }
+.about-bg-accent {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: radial-gradient(ellipse at top right, rgba(24,71,240,0.08), transparent 60%);
+  pointer-events: none;
+}
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-visual { position: relative; }
+.about-card-stack { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.about-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.about-card:hover { transform: translateX(6px); box-shadow: var(--glow); }
+.about-card i {
+  font-size: 1.4rem; color: var(--accent);
+  flex-shrink: 0;
+}
+.about-card div { display: flex; flex-direction: column; gap: 2px; }
+.about-card strong {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700; color: var(--white);
+}
+.about-card span { font-size: 0.82rem; color: var(--text-muted); }
+.ac-1 { margin-left: 0; }
+.ac-2 { margin-left: 24px; }
+.ac-3 { margin-left: 0; }
+
+/* Code decoration */
+.code-deco {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  line-height: 1.9;
+  position: relative;
+  overflow: hidden;
+}
+.code-deco::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue-core), var(--accent));
+}
+.code-line { color: var(--off-white); }
+.code-line.indent { padding-left: 20px; }
+.code-line.comment { color: #5a7a9a; }
+.kw { color: #c792ea; }
+.fn { color: #82aaff; }
+.str { color: #c3e88d; }
+
+/* About text */
+.about-text { }
+.about-text p {
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 18px;
+  font-size: 1rem;
+}
+.about-text p em { color: var(--accent-light); font-style: normal; font-weight: 600; }
+.about-badges {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin: 28px 0 32px;
+}
+.badge-item {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(24,71,240,0.12);
+  border: 1px solid var(--border);
+  padding: 8px 16px; border-radius: 100px;
+  font-size: 0.85rem; color: var(--off-white);
+  transition: background 0.2s;
+}
+.badge-item:hover { background: rgba(24,71,240,0.2); }
+.badge-item i { color: var(--accent); font-size: 0.8rem; }
+
+/* =====================================================
+   MISSION & VISION
+===================================================== */
+.mv-section {
+  position: relative; overflow: hidden;
+  background: var(--navy);
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+.mv-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #071030 0%, #0d1d45 50%, #060d1f 100%);
+}
+.mv-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(46,108,247,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,108,247,0.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.mv-section .container { position: relative; z-index: 2; }
+.mv-section .section-label { text-align: center; }
+.mv-section .section-title { text-align: center; margin-bottom: 60px; }
+.mv-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.mv-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.mv-card:hover { border-color: var(--border); box-shadow: var(--glow); }
+.mission-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(to bottom, var(--blue-core), var(--accent));
+  border-radius: 0 2px 2px 0;
+}
+.vision-card::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(to bottom, var(--accent), var(--blue-core));
+  border-radius: 2px 0 0 2px;
+}
+.mv-icon {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, rgba(24,71,240,0.3), rgba(0,212,255,0.15));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; color: var(--accent);
+  margin-bottom: 24px;
+}
+.mv-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.mv-divider {
+  width: 50px; height: 3px;
+  background: linear-gradient(90deg, var(--blue-core), var(--accent));
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+.mv-statement {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--accent-light);
+  line-height: 1.8;
+  border-left: 3px solid var(--border);
+  padding-left: 18px;
+  margin-bottom: 22px;
+}
+.mv-detail {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.mv-values {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 24px;
+}
+.mv-values li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; color: var(--off-white);
+}
+.mv-values li i { color: var(--accent); font-size: 0.6rem; }
+
+/* =====================================================
+   PROCESS
+===================================================== */
+.process-section { background: var(--navy-mid); }
+.process-section .section-label,
+.process-section .section-title { text-align: center; }
+.process-section .section-sub { text-align: center; margin: 0 auto 70px; }
+
+.process-track { position: relative; max-width: 800px; margin: 0 auto; }
+.process-line {
+  position: absolute;
+  left: 31px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue-core), var(--accent), transparent);
+  z-index: 0;
+}
+.process-step {
+  display: flex; gap: 32px;
+  margin-bottom: 44px;
+  position: relative; z-index: 1;
+  align-items: flex-start;
+}
+.step-num {
+  width: 64px; height: 64px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-core), var(--blue-glow));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700; color: #fff;
+  box-shadow: 0 0 20px rgba(24,71,240,0.4);
+}
+.step-body {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  flex: 1;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.step-body:hover { border-color: var(--accent); box-shadow: var(--glow); }
+.step-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.step-body h3 i { color: var(--accent); font-size: 1rem; }
+.step-body p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.8; }
+
+/* =====================================================
+   TESTIMONIALS
+===================================================== */
+.testimonials-section { background: var(--navy); }
+.testimonials-section .section-label,
+.testimonials-section .section-title { text-align: center; }
+.testimonials-section .section-sub { text-align: center; margin: 0 auto 60px; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+.test-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.test-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow);
+  border-color: rgba(0,212,255,0.4);
+}
+.test-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 16px; display: flex; gap: 3px; }
+.test-quote {
+  font-size: 0.95rem;
+  color: var(--off-white);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.test-author { display: flex; align-items: center; gap: 14px; }
+.test-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-core), var(--blue-glow));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.test-name { display: block; font-weight: 700; color: var(--white); font-size: 0.9rem; }
+.test-role { display: block; font-size: 0.78rem; color: var(--text-muted); }
+
+/* =====================================================
+   FAQ
+===================================================== */
+.faq-section { background: var(--navy-mid); }
+.faq-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+.faq-left .section-title { margin-bottom: 14px; }
+.faq-left p { color: var(--text-muted); margin-bottom: 28px; line-height: 1.8; }
+.faq-list { display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  width: 100%; padding: 20px 24px;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 0.98rem; font-weight: 600;
+  color: var(--white);
+  text-align: left;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-icon { font-size: 0.8rem; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; }
+.faq-q[aria-expanded="true"] .faq-icon { transform: rotate(180deg); }
+.faq-a { padding: 0 24px 20px; }
+.faq-a p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; }
+
+/* =====================================================
+   CTA BANNER
+===================================================== */
+.cta-banner {
+  position: relative; overflow: hidden;
+  padding: 100px 24px;
+  text-align: center;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0b1a4a 0%, #091536 50%, #0f2060 100%);
+}
+.cta-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,170,255,0.15), transparent 60%);
+}
+.cta-inner { position: relative; z-index: 2; }
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700; color: #fff; margin-bottom: 18px;
+}
+.cta-headline em { color: var(--accent); font-style: normal; }
+.cta-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.65);
+  max-width: 560px; margin: 0 auto 40px; line-height: 1.8;
+}
+.cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+/* =====================================================
+   CONTACT
+===================================================== */
+.contact-section { background: var(--navy); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-info .section-title { margin-bottom: 16px; }
+.contact-info > p { color: var(--text-muted); margin-bottom: 36px; line-height: 1.8; }
+.contact-details { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.contact-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: border-color 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+.contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+.ci-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: rgba(24,71,240,0.15);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--accent);
+}
+.contact-item div { display: flex; flex-direction: column; gap: 3px; }
+.ci-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; }
+.ci-value { font-size: 0.95rem; color: var(--off-white); font-weight: 600; }
+.social-links { display: flex; gap: 12px; }
+.social-btn {
+  width: 46px; height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--text-muted);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.social-btn:hover { background: var(--blue-core); color: #fff; border-color: var(--blue-core); }
+
+/* Contact Form */
+.contact-form-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  backdrop-filter: blur(12px);
+}
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label {
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--text-muted); letter-spacing: 0.3px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px 16px;
+  color: var(--off-white);
+  font-family: var(--font-body);
+  font-size: 0.93rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 3px rgba(24,71,240,0.15);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #405070; }
+.form-group select option { background: var(--navy-mid); color: var(--off-white); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-error { font-size: 0.78rem; color: #f87171; min-height: 16px; }
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid { border-color: #f87171; }
+
+.form-success {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex; align-items: center; gap: 14px;
+  color: #6ee7b7;
+}
+.form-success i { font-size: 1.5rem; }
+.form-success p { font-size: 0.93rem; line-height: 1.6; }
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.site-footer { background: #04091a; }
+.footer-top { padding: 70px 24px 50px; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+}
+.footer-brand .footer-logo {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px;
+}
+.footer-tagline {
+  font-size: 0.9rem; color: var(--text-muted);
+  line-height: 1.7; margin-bottom: 24px;
+}
+.footer-socials { display: flex; gap: 10px; }
+.footer-socials a {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.footer-socials a:hover { background: var(--blue-core); color: #fff; border-color: var(--blue-core); }
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 20px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a,
+.footer-col ul li span {
+  font-size: 0.88rem; color: var(--text-muted);
+  transition: color 0.2s;
+  display: block;
+}
+.footer-col ul li a:hover { color: var(--accent); }
+.footer-contact-list { display: flex; flex-direction: column; gap: 12px; }
+.footer-contact-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.87rem; color: var(--text-muted);
+}
+.footer-contact-list li i { color: var(--accent); margin-top: 3px; flex-shrink: 0; }
+.footer-contact-list li a { color: var(--text-muted); transition: color 0.2s; }
+.footer-contact-list li a:hover { color: var(--accent); }
+
+.footer-bottom {
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid var(--border-light);
+  padding: 20px 24px;
+}
+.footer-bottom-inner {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom-inner p { font-size: 0.82rem; color: #3a5075; }
+.footer-tagline-bottom {
+  font-family: var(--font-display);
+  font-size: 0.82rem; letter-spacing: 1px;
+  color: var(--text-muted) !important;
+}
+
+/* =====================================================
+   BACK TO TOP
+===================================================== */
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, var(--blue-core), var(--blue-glow));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1rem;
+  box-shadow: 0 4px 20px rgba(24,71,240,0.5);
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 500;
+}
+.back-to-top:hover { transform: translateY(-3px); }
+
+/* =====================================================
+   RESPONSIVE — TABLET
+===================================================== */
+@media (max-width: 1024px) {
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { order: -1; }
+  .mv-grid-layout { grid-template-columns: 1fr; }
+  .faq-inner { grid-template-columns: 1fr; gap: 48px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .hero-visual { display: block; position: relative; transform: none; right: auto; top: auto; width: 100%; max-width: 380px; margin: 40px auto 0; }
+  .hero-content { max-width: 100%; }
+}
+
+/* =====================================================
+   RESPONSIVE — MOBILE
+===================================================== */
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+  .services-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-stats { flex-direction: column; }
+  .stat-divider { display: none; }
+  .stat-item { flex-direction: row; justify-content: flex-start; gap: 12px; }
+  .process-line { display: none; }
+  .process-step { flex-direction: column; gap: 16px; }
+  .hero-section { padding-top: 120px; }
+  .footer-bottom-inner { justify-content: center; text-align: center; }
+  .back-to-top { bottom: 20px; right: 16px; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .hero-actions { flex-direction: column; }
+  /* Hide custom cursor on touch devices */
+  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+
+@media (max-width: 480px) {
+  .mv-card { padding: 32px 24px; }
+  .contact-form-wrap { padding: 28px 20px; }
+  .section-title { font-size: 1.8rem; }
+}
+
+/* =====================================================
+   LARGE SCREENS — show hero visual
+===================================================== */
+@media (min-width: 1200px) {
+  .hero-visual { display: block; }
+  .hero-section {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .hero-content { flex: 1; }
+  .hero-visual {
+    position: relative;
+    top: auto; right: auto; transform: none;
+    flex-shrink: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-logo">
+      <span class="ez-box">EZ</span>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ========== CURSOR ========== -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ========== STICKY NAV ========== -->
+  <header id="navbar">
+    <nav class="nav-container" role="navigation" aria-label="Main navigation">
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="EasyZero Techworks home">
+        <div class="logo-box">EZ</div>
+        <div class="logo-text">
+          <span class="logo-main">EASYZERO</span>
+          <span class="logo-sub">TECHWORKS</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#mission" class="nav-link">Mission</a></li>
+        <li><a href="#process" class="nav-link">Process</a></li>
+        <li><a href="#testimonials" class="nav-link">Clients</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- CTA + Hamburger -->
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary nav-cta">Get a Quote</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="#services" class="mob-link">Services</a></li>
+        <li><a href="#about" class="mob-link">About</a></li>
+        <li><a href="#mission" class="mob-link">Mission</a></li>
+        <li><a href="#process" class="mob-link">Process</a></li>
+        <li><a href="#testimonials" class="mob-link">Clients</a></li>
+        <li><a href="#faq" class="mob-link">FAQ</a></li>
+        <li><a href="#contact" class="mob-link">Contact</a></li>
+        <li><a href="#contact" class="btn btn-primary mob-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="hero-section" aria-label="Hero">
+      <!-- Animated grid background -->
+      <div class="hero-grid" aria-hidden="true"></div>
+      <!-- Orb glows -->
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="orb orb-3" aria-hidden="true"></div>
+
+      <!-- Floating tech icons -->
+      <div class="floating-icons" aria-hidden="true">
+        <span class="fi fi-1"><i class="fa-solid fa-code"></i></span>
+        <span class="fi fi-2"><i class="fa-solid fa-chart-line"></i></span>
+        <span class="fi fi-3"><i class="fa-solid fa-robot"></i></span>
+        <span class="fi fi-4"><i class="fa-solid fa-globe"></i></span>
+        <span class="fi fi-5"><i class="fa-solid fa-cart-shopping"></i></span>
+        <span class="fi fi-6"><i class="fa-solid fa-rocket"></i></span>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <i class="fa-solid fa-circle-check"></i> Johannesburg's Digital Innovation Partner
+        </div>
+        <h1 class="hero-headline reveal">
+          <span class="hero-headline-top">Smart Solutions.</span>
+          <span class="hero-headline-mid">Scalable <em>Impact.</em></span>
+          <span class="hero-headline-bot">Built for <strong>Your Success.</strong></span>
+        </h1>
+        <p class="hero-sub reveal">
+          EasyZero Techworks engineers world-class digital products — from sleek websites and
+          e-commerce platforms to intelligent automation systems — that propel your business
+          into its next growth phase.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#services" class="btn btn-primary btn-lg">
+            Explore Services <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#contact" class="btn btn-outline btn-lg">
+            Free Consultation
+          </a>
+        </div>
+        <!-- Stats row -->
+        <div class="hero-stats reveal">
+          <div class="stat-item">
+            <span class="stat-num" data-count="120">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-count="98">0</span><span class="stat-plus">%</span>
+            <span class="stat-label">Client Satisfaction</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-count="6">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-num" data-count="15">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Industries Served</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual: mock browser window -->
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="mock-url">easyzerotechworks.com</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-line w80 blue"></div>
+            <div class="mock-line w60"></div>
+            <div class="mock-line w90"></div>
+            <div class="mock-row">
+              <div class="mock-card-sm"></div>
+              <div class="mock-card-sm accent"></div>
+              <div class="mock-card-sm"></div>
+            </div>
+            <div class="mock-line w50"></div>
+            <div class="mock-line w70 blue"></div>
+            <div class="mock-chart">
+              <div class="bar" style="height:40%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar" style="height:55%"></div>
+              <div class="bar accent" style="height:90%"></div>
+              <div class="bar" style="height:65%"></div>
+              <div class="bar" style="height:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <a href="#services" class="scroll-cue" aria-label="Scroll down">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ========== TRUST STRIP ========== -->
+    <section class="trust-strip" aria-label="Trust indicators">
+      <div class="strip-inner">
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Reliable</div>
+        <div class="trust-sep" aria-hidden="true">·</div>
+        <div class="trust-item"><i class="fa-solid fa-rocket"></i> Innovative</div>
+        <div class="trust-sep" aria-hidden="true">·</div>
+        <div class="trust-item"><i class="fa-solid fa-user-check"></i> Client-Focused</div>
+        <div class="trust-sep" aria-hidden="true">·</div>
+        <div class="trust-item"><i class="fa-solid fa-lock"></i> Secure</div>
+        <div class="trust-sep" aria-hidden="true">·</div>
+        <div class="trust-item"><i class="fa-solid fa-bolt"></i> Fast Delivery</div>
+        <div class="trust-sep" aria-hidden="true">·</div>
+        <div class="trust-item"><i class="fa-solid fa-headset"></i> 24/7 Support</div>
+      </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services" class="section services-section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-label reveal">What We Do</div>
+        <h2 class="section-title reveal" id="services-title">
+          Six Pillars of Digital Excellence
+        </h2>
+        <p class="section-sub reveal">
+          Every service we offer is designed around one goal: making your business grow faster,
+          smarter, and more sustainably in the digital world.
+        </p>
+
+        <div class="services-grid">
+
+          <!-- SERVICE 1 -->
+          <article class="service-card reveal" data-index="1">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">01</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-globe" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">Web &amp; Platform Development</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              Modern Websites, Web Apps &amp; SaaS solutions built to scale with performance and reliability.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Custom website design &amp; development</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Progressive Web Apps (PWA) &amp; SPAs</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> SaaS platform architecture</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> CMS integration (WordPress, Webflow, Headless)</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Cloud hosting &amp; deployment</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Performance optimisation &amp; Core Web Vitals</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                Whether you need a blazing-fast marketing site, a complex multi-tenant SaaS platform,
+                or a web application your team relies on daily, our engineers architect solutions
+                built for the long haul. We use modern stacks (React, Next.js, Node.js, Laravel)
+                and follow best practices for security, accessibility, and scalability so your
+                platform grows with your business — not against it.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> Startups launching MVPs, established businesses
+                replacing outdated sites, enterprises needing custom web applications.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- SERVICE 2 -->
+          <article class="service-card reveal" data-index="2">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">02</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">E-Commerce &amp; Online Business</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              Secure online stores, smooth payments &amp; powerful e-commerce platforms that grow your business.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Custom Shopify, WooCommerce &amp; Magento builds</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Payment gateway integration (PayFast, Stripe, PayPal)</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Inventory &amp; order management systems</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Multi-currency &amp; multi-language support</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Abandoned cart recovery &amp; email automation</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Analytics &amp; conversion rate optimisation</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                We build e-commerce ecosystems that turn browsers into buyers. Beyond just setting
+                up a store, we engineer the full customer journey — from first touch to repeat
+                purchase — with seamless checkout flows, trust signals, and integrated marketing
+                tools that maximise your revenue per visitor.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> Retailers moving online, D2C brands, wholesale businesses,
+                and service companies launching digital product offerings.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- SERVICE 3 -->
+          <article class="service-card reveal" data-index="3">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">03</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">Custom Business Systems</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              Tailored dashboards, tools &amp; automation systems designed to simplify and scale operations.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Bespoke ERP &amp; CRM development</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Interactive business intelligence dashboards</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> HR, payroll &amp; project management tools</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Third-party API &amp; system integration</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Role-based access control &amp; security</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Real-time reporting &amp; data visualisation</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                Off-the-shelf software rarely fits your unique processes perfectly. We build
+                custom internal tools that match exactly how your team works — saving hours of
+                manual effort daily, eliminating costly software subscriptions, and giving you
+                data visibility that drives smarter decisions.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> SMEs outgrowing generic software, enterprises needing
+                bespoke internal platforms, agencies managing complex client workflows.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- SERVICE 4 -->
+          <article class="service-card reveal" data-index="4">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">04</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">User Experience &amp; Interface Engineering</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              Beautiful, intuitive UI/UX design &amp; responsive front-end development that users love.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> User research &amp; persona mapping</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Wireframing, prototyping &amp; usability testing</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Design systems &amp; component libraries</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Pixel-perfect responsive front-end development</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Accessibility (WCAG 2.1 compliance)</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Brand identity alignment &amp; style guides</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                Great technology without great design is invisible. We obsess over every pixel,
+                interaction, and micro-animation so your product doesn't just work — it delights.
+                Our UX process is rooted in real user behaviour, ensuring that what we build
+                reduces friction, increases engagement, and converts.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> Product teams needing a design partner, companies
+                rebranding digitally, apps that need a UX overhaul to reduce churn.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- SERVICE 5 -->
+          <article class="service-card reveal" data-index="5">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">05</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">Digital Growth &amp; Online Presence</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              SEO, analytics &amp; visibility strategies that help you rank higher &amp; reach farther.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Technical SEO audits &amp; ongoing optimisation</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Local SEO for Johannesburg &amp; South Africa</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Google Analytics 4 &amp; Search Console setup</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Content strategy &amp; keyword planning</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Google Ads &amp; social media advertising</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Monthly performance reporting &amp; insights</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                Being online isn't enough — you need to be found. We build and execute digital
+                growth strategies that compound over time, combining technical SEO excellence
+                with targeted paid advertising to drive consistent, qualified traffic to your
+                business. Our data-first approach means every rand spent is tracked and optimised.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> Businesses struggling with visibility, new websites
+                needing organic traffic, companies wanting to reduce paid ad dependency over time.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- SERVICE 6 -->
+          <article class="service-card reveal" data-index="6">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="card-number" aria-hidden="true">06</div>
+            <div class="card-icon-wrap">
+              <i class="fa-solid fa-robot" aria-hidden="true"></i>
+            </div>
+            <h3 class="card-title">Automation &amp; Advanced Technology</h3>
+            <div class="card-divider" aria-hidden="true"></div>
+            <p class="card-intro">
+              Smart workflows, AI tools &amp; system integrations that boost productivity and drive innovation.
+            </p>
+            <ul class="card-features" aria-label="Features">
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Business process automation (RPA / Zapier / Make)</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> AI-powered chatbots &amp; virtual assistants</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Custom API development &amp; integrations</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Data pipelines &amp; ETL workflows</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Machine learning model integration</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i> IoT connectivity &amp; cloud automation</li>
+            </ul>
+            <div class="card-deep">
+              <p>
+                The future belongs to businesses that automate intelligently. We identify the
+                repetitive, time-consuming processes in your organisation and replace them with
+                smart automated workflows — freeing your team to focus on high-value work.
+                From AI-powered customer service bots to complex data pipelines, we bring
+                enterprise-grade automation within reach for businesses of every size.
+              </p>
+              <p>
+                <strong>Ideal for:</strong> Companies drowning in manual tasks, teams needing
+                better data flows, businesses ready to leverage AI competitively.
+              </p>
+            </div>
+            <div class="card-pricing">
+              <span class="pricing-label">Starting from</span>
+              <span class="pricing-value">Contact for Pricing</span>
+            </div>
+            <a href="#contact" class="card-cta">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+        </div><!-- /.services-grid -->
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="section about-section" aria-labelledby="about-title">
+      <div class="about-bg-accent" aria-hidden="true"></div>
+      <div class="container about-inner">
+        <!-- Left: Visual -->
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="about-card-stack">
+            <div class="about-card ac-1">
+              <i class="fa-solid fa-trophy"></i>
+              <div>
+                <strong>120+</strong>
+                <span>Projects Completed</span>
+              </div>
+            </div>
+            <div class="about-card ac-2">
+              <i class="fa-solid fa-star"></i>
+              <div>
+                <strong>98%</strong>
+                <span>Client Satisfaction</span>
+              </div>
+            </div>
+            <div class="about-card ac-3">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <strong>Jozi Based</strong>
+                <span>Serving South Africa &amp; Beyond</span>
+              </div>
+            </div>
+          </div>
+          <!-- Code snippet deco -->
+          <div class="code-deco">
+            <div class="code-line"><span class="kw">function</span> <span class="fn">success</span>(partner) &#123;</div>
+            <div class="code-line indent"><span class="kw">const</span> solution = <span class="str">'Smart'</span>;</div>
+            <div class="code-line indent"><span class="kw">const</span> impact = <span class="str">'Scalable'</span>;</div>
+            <div class="code-line indent"><span class="kw">return</span> <span class="str">`We build ${"{"}solution{"}"} solutions`</span>;</div>
+            <div class="code-line">&#125;</div>
+            <div class="code-line comment">// EasyZero Techworks —</div>
+            <div class="code-line comment">// Your Partner in Digital Success</div>
+          </div>
+        </div>
+
+        <!-- Right: Text -->
+        <div class="about-text">
+          <div class="section-label reveal">Who We Are</div>
+          <h2 class="section-title reveal" id="about-title">
+            Built by Engineers.<br/>Driven by Results.
+          </h2>
+          <p class="reveal">
+            EasyZero Techworks is a Johannesburg-based digital technology company dedicated to
+            building powerful, purpose-driven digital solutions for businesses across South Africa
+            and the globe. Founded on the belief that <em>every business deserves world-class
+            technology</em>, we combine technical expertise with strategic thinking to deliver
+            outcomes — not just outputs.
+          </p>
+          <p class="reveal">
+            Our multidisciplinary team of developers, designers, and digital strategists has
+            helped businesses in retail, healthcare, finance, education, and beyond build their
+            digital presence from the ground up. We don't do cookie-cutter — every solution we
+            build is engineered around your specific goals, constraints, and customers.
+          </p>
+          <p class="reveal">
+            Located in the heart of Gauteng Province, we're proudly local while thinking globally.
+            We understand the South African business landscape, the opportunities, the challenges,
+            and what it takes to win online in this market.
+          </p>
+          <div class="about-badges reveal">
+            <div class="badge-item"><i class="fa-solid fa-shield-halved"></i> Secure &amp; Compliant</div>
+            <div class="badge-item"><i class="fa-solid fa-clock"></i> On-Time Delivery</div>
+            <div class="badge-item"><i class="fa-solid fa-handshake"></i> Transparent Partnership</div>
+            <div class="badge-item"><i class="fa-solid fa-arrow-trend-up"></i> Growth-Focused</div>
+          </div>
+          <a href="#contact" class="btn btn-primary reveal">Work With Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MISSION & VISION ========== -->
+    <section id="mission" class="section mv-section" aria-labelledby="mv-title">
+      <div class="mv-bg" aria-hidden="true">
+        <div class="mv-grid" aria-hidden="true"></div>
+      </div>
+      <div class="container">
+        <div class="section-label reveal" style="color:var(--accent-light)">Our North Star</div>
+        <h2 class="section-title reveal" id="mv-title" style="color:#fff">
+          Purpose &amp; Direction
+        </h2>
+
+        <div class="mv-grid-layout">
+          <!-- Mission -->
+          <div class="mv-card mission-card reveal">
+            <div class="mv-icon" aria-hidden="true">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h3>Our Mission</h3>
+            <div class="mv-divider" aria-hidden="true"></div>
+            <p class="mv-statement">
+              "To empower businesses of every size with intelligent, elegant, and scalable
+              digital solutions — delivered with integrity, crafted with precision, and
+              measured by your success."
+            </p>
+            <p class="mv-detail">
+              At EasyZero Techworks, we exist to democratise access to world-class digital
+              technology. Too many great businesses are held back by outdated systems, poor
+              online presence, or a lack of technical expertise. We bridge that gap — partnering
+              with you as a long-term technology ally, not just a service provider.
+            </p>
+            <p class="mv-detail">
+              Every project we take on is treated as if it were our own business. We ask the
+              hard questions, challenge assumptions, and always build with your end customer
+              and long-term growth in mind. Our success is only meaningful when yours is tangible.
+            </p>
+            <ul class="mv-values">
+              <li><i class="fa-solid fa-diamond"></i> Integrity in every interaction</li>
+              <li><i class="fa-solid fa-diamond"></i> Excellence without compromise</li>
+              <li><i class="fa-solid fa-diamond"></i> Collaboration over transaction</li>
+              <li><i class="fa-solid fa-diamond"></i> Continuous learning &amp; innovation</li>
+            </ul>
+          </div>
+
+          <!-- Vision -->
+          <div class="mv-card vision-card reveal">
+            <div class="mv-icon" aria-hidden="true">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <h3>Our Vision</h3>
+            <div class="mv-divider" aria-hidden="true"></div>
+            <p class="mv-statement">
+              "To be Africa's most trusted digital transformation partner — the company
+              businesses call first when they want to build something extraordinary online."
+            </p>
+            <p class="mv-detail">
+              We envision a South Africa — and an Africa — where every ambitious business has
+              access to the technology, talent, and strategy it needs to compete on a global
+              stage. EasyZero Techworks is building towards that future, one client at a time.
+            </p>
+            <p class="mv-detail">
+              In ten years, we see ourselves having powered thousands of digital transformations,
+              having mentored the next generation of African tech talent, and having proven
+              that innovation isn't geography-dependent. The best digital solutions in the
+              world can be — and will be — built right here.
+            </p>
+            <ul class="mv-values">
+              <li><i class="fa-solid fa-diamond"></i> African digital leadership</li>
+              <li><i class="fa-solid fa-diamond"></i> Global-standard quality, local relevance</li>
+              <li><i class="fa-solid fa-diamond"></i> Building the future, not following it</li>
+              <li><i class="fa-solid fa-diamond"></i> Impact that outlasts every project</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROCESS ========== -->
+    <section id="process" class="section process-section" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-label reveal">How We Work</div>
+        <h2 class="section-title reveal" id="process-title">Our Proven Process</h2>
+        <p class="section-sub reveal">
+          A structured, transparent methodology that keeps projects on time, on budget,
+          and exceeding expectations — every single time.
+        </p>
+
+        <div class="process-track">
+          <div class="process-line" aria-hidden="true"></div>
+
+          <div class="process-step reveal">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-magnifying-glass"></i> Discovery &amp; Strategy</h3>
+              <p>
+                We start with deep listening. We learn about your business, goals, target
+                audience, competitors, and technical environment before writing a single line
+                of code. This phase produces a clear project roadmap, technical specification,
+                and success metrics.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-pencil-ruler"></i> Design &amp; Prototype</h3>
+              <p>
+                Our designers create wireframes and high-fidelity mockups that bring the vision
+                to life before development begins. You review, give feedback, and sign off —
+                ensuring there are no surprises when the build starts.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-code" aria-hidden="true"></i> Development &amp; Build</h3>
+              <p>
+                Our engineers build your solution using modern, battle-tested technologies.
+                We work in structured sprints with regular milestone demos so you can see
+                progress and stay involved throughout. Quality is baked in from day one.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-vials"></i> Testing &amp; Quality Assurance</h3>
+              <p>
+                Before anything touches your customers, it goes through rigorous QA — functional
+                testing, performance benchmarking, security audits, and cross-device/browser
+                checks. We don't ship anything we wouldn't be proud to put our name on.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-num">05</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-rocket"></i> Launch &amp; Deploy</h3>
+              <p>
+                Launch day is smooth because we've prepared meticulously. We handle deployment,
+                DNS configuration, SSL setup, and performance monitoring so your go-live is
+                exciting, not stressful.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-num">06</div>
+            <div class="step-body">
+              <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Growth &amp; Support</h3>
+              <p>
+                The relationship doesn't end at launch. We provide ongoing maintenance, feature
+                development, and performance optimisation to keep your digital asset competitive
+                and growing. We're your long-term technology partner.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section id="testimonials" class="section testimonials-section" aria-labelledby="test-title">
+      <div class="container">
+        <div class="section-label reveal">Client Voices</div>
+        <h2 class="section-title reveal" id="test-title">What Our Clients Say</h2>
+        <p class="section-sub reveal">
+          Don't take our word for it — here's what business owners across South Africa
+          say about working with EasyZero Techworks.
+        </p>
+
+        <div class="testimonials-grid">
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "EasyZero rebuilt our entire e-commerce platform from scratch. Within three months
+              of launch, our online revenue had doubled. Their attention to detail and
+              post-launch support has been exceptional."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">NK</div>
+              <div>
+                <cite class="test-name">Nomsa K.</cite>
+                <span class="test-role">CEO, Fashion Retailer — Johannesburg</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "The custom CRM they built for our agency saved us 15 hours of admin work per week
+              and gave us visibility into our pipeline we never had before. Genuinely
+              transformative."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">TM</div>
+              <div>
+                <cite class="test-name">Thabo M.</cite>
+                <span class="test-role">Managing Director, Marketing Agency — Sandton</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "Their SEO team took us from page 5 to position 1 for our most competitive keywords
+              in under 6 months. We now get more qualified leads from organic search than
+              from paid ads."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">PR</div>
+              <div>
+                <cite class="test-name">Priya R.</cite>
+                <span class="test-role">Founder, Legal Services Firm — Pretoria</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "Working with EasyZero felt like having a tech co-founder. They challenged our
+              assumptions, brought ideas we hadn't considered, and delivered a product that
+              absolutely exceeded our expectations."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">JV</div>
+              <div>
+                <cite class="test-name">Jan V.</cite>
+                <span class="test-role">CTO, Proptech Startup — Johannesburg</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "The UI/UX overhaul they did for our app reduced our churn rate by 34% within
+              two months. Users literally commented on how much smoother it felt. Worth every cent."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">SL</div>
+              <div>
+                <cite class="test-name">Sipho L.</cite>
+                <span class="test-role">Product Manager, FinTech — Johannesburg</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="test-card reveal">
+            <div class="test-stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "The automation workflows they implemented eliminated an entire manual department's
+              worth of data entry. The ROI was evident within the first quarter. Outstanding team."
+            </p>
+            <footer class="test-author">
+              <div class="test-avatar" aria-hidden="true">AM</div>
+              <div>
+                <cite class="test-name">Ayesha M.</cite>
+                <span class="test-role">Operations Director, Logistics Company — Johannesburg</span>
+              </div>
+            </footer>
+          </blockquote>
+
+        </div><!-- /.testimonials-grid -->
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section id="faq" class="section faq-section" aria-labelledby="faq-title">
+      <div class="container faq-inner">
+        <div class="faq-left">
+          <div class="section-label reveal">FAQs</div>
+          <h2 class="section-title reveal" id="faq-title">
+            Common Questions, Honest Answers
+          </h2>
+          <p class="reveal">
+            Still unsure about something? Reach out — we love a good conversation.
+          </p>
+          <a href="#contact" class="btn btn-outline reveal">Ask Us Anything</a>
+        </div>
+        <div class="faq-right">
+          <div class="faq-list" role="list">
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                How long does a typical project take?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  Timelines vary by scope. A standard marketing website typically takes 3–5 weeks.
+                  A complex e-commerce platform or custom business system can take 8–16 weeks.
+                  We always provide a detailed timeline with milestones during our discovery phase
+                  so you know exactly what to expect and when.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                Do you work with small businesses or only large companies?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  We work with businesses of all sizes — from solopreneurs launching their first
+                  website to established SMEs building complex internal systems. Our solutions
+                  are always scoped and priced to your specific needs and budget.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                What happens after my project launches?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  Launch is just the beginning. We offer ongoing maintenance retainers, monthly
+                  SEO and analytics reporting, feature development sprints, and priority support.
+                  Most of our clients become long-term partners because we're invested in their
+                  continued growth, not just the initial delivery.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                What technologies do you work with?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  Our stack is modern and versatile. For web development: React, Next.js, Vue,
+                  Node.js, Laravel, PHP. For e-commerce: Shopify, WooCommerce, Magento. For mobile:
+                  React Native, Flutter. For data &amp; automation: Python, Zapier, Make, n8n,
+                  and various AI APIs including OpenAI. We choose the right tool for the job,
+                  not the most fashionable.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                How is pricing structured?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  We offer fixed-price project quotes for well-defined scopes, and monthly retainers
+                  for ongoing work. Every quote is based on a detailed scope document agreed upfront,
+                  so there are no surprise invoices. We're fully transparent about costs throughout
+                  the engagement.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                Do you provide hosting and domain services?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  Yes. We can manage hosting, domain registration, SSL certificates, and email
+                  setup on your behalf. We work with reputable providers (AWS, Vercel, Cloudflare,
+                  Hetzner) and can recommend the right infrastructure for your traffic and budget.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item reveal" role="listitem">
+              <button class="faq-q" aria-expanded="false">
+                Can you work with our existing codebase or vendor?
+                <i class="fa-solid fa-chevron-down faq-icon" aria-hidden="true"></i>
+              </button>
+              <div class="faq-a" hidden>
+                <p>
+                  Absolutely. We regularly inherit legacy codebases, audit existing systems, and
+                  integrate with third-party vendors. We'll always give you an honest assessment
+                  of what we find and the most practical path forward.
+                </p>
+              </div>
+            </div>
+
+          </div><!-- /.faq-list -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA BANNER ========== -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="cta-bg" aria-hidden="true"></div>
+      <div class="container cta-inner">
+        <h2 class="cta-headline reveal">
+          Ready to Build Something <em>Extraordinary?</em>
+        </h2>
+        <p class="cta-sub reveal">
+          Let's have a conversation. No pressure, no hard sell — just an honest discussion
+          about your goals and how we can help you get there.
+        </p>
+        <div class="cta-actions reveal">
+          <a href="#contact" class="btn btn-white btn-lg">Start a Project</a>
+          <a href="tel:0639240423" class="btn btn-outline-white btn-lg">
+            <i class="fa-solid fa-phone"></i> 063 924 0423
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <!-- Left: Info -->
+        <div class="contact-info">
+          <div class="section-label reveal">Get In Touch</div>
+          <h2 class="section-title reveal" id="contact-title">
+            Let's Build Your Digital Future
+          </h2>
+          <p class="reveal">
+            Whether you have a fully-formed brief or just an idea on a napkin, we'd love to
+            hear from you. Reach out through any of the channels below or fill in the form.
+          </p>
+
+          <div class="contact-details">
+            <a href="tel:0639240423" class="contact-item reveal" aria-label="Call us">
+              <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <span class="ci-label">Phone</span>
+                <span class="ci-value">063 924 0423</span>
+              </div>
+            </a>
+
+            <a href="mailto:info@easyzerotechworks.com" class="contact-item reveal" aria-label="Email us">
+              <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <span class="ci-label">Email</span>
+                <span class="ci-value">info@easyzerotechworks.com</span>
+              </div>
+            </a>
+
+            <a href="https://www.easyzerotechworks.com" target="_blank" rel="noopener" class="contact-item reveal" aria-label="Visit our website">
+              <div class="ci-icon"><i class="fa-solid fa-globe"></i></div>
+              <div>
+                <span class="ci-label">Website</span>
+                <span class="ci-value">www.easyzerotechworks.com</span>
+              </div>
+            </a>
+
+            <div class="contact-item reveal">
+              <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <span class="ci-label">Location</span>
+                <span class="ci-value">Johannesburg, Gauteng Province, South Africa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="social-links reveal">
+            <a href="https://www.instagram.com/easyzerotechworks" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/easyzerotechworks" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/easyzerotechworks" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-wrap reveal">
+          <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="Your first name" />
+                <span class="form-error" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="Your last name" />
+                <span class="form-error" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+              <span class="form-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+27 000 000 0000" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service of Interest *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option value="web">Web &amp; Platform Development</option>
+                <option value="ecommerce">E-Commerce &amp; Online Business</option>
+                <option value="systems">Custom Business Systems</option>
+                <option value="ux">User Experience &amp; Interface Engineering</option>
+                <option value="growth">Digital Growth &amp; Online Presence</option>
+                <option value="automation">Automation &amp; Advanced Technology</option>
+                <option value="multiple">Multiple Services</option>
+                <option value="unsure">Not Sure Yet</option>
+              </select>
+              <span class="form-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="budget">Project Budget (ZAR)</label>
+              <select id="budget" name="budget">
+                <option value="" disabled selected>Select a budget range...</option>
+                <option value="under5k">Under R5,000</option>
+                <option value="5k-15k">R5,000 – R15,000</option>
+                <option value="15k-30k">R15,000 – R30,000</option>
+                <option value="30k-50k">R30,000 – R50,000</option>
+                <option value="50k+">R50,000+</option>
+                <option value="discuss">Prefer to discuss</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell Us About Your Project *</label>
+              <textarea id="message" name="message" required rows="5" placeholder="Describe your project, goals, and any specific requirements..."></textarea>
+              <span class="form-error" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="formSubmit">
+              <span class="btn-text">Send Message</span>
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            </button>
+
+            <div class="form-success" id="formSuccess" hidden role="status" aria-live="polite">
+              <i class="fa-solid fa-circle-check"></i>
+              <p>Thank you! We've received your message and will be in touch within 24 hours.</p>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-box">EZ</div>
+            <div class="logo-text">
+              <span class="logo-main">EASYZERO</span>
+              <span class="logo-sub">TECHWORKS</span>
+            </div>
+          </div>
+          <p class="footer-tagline">
+            Smart Solutions. Scalable Impact.<br/>Built for Your Success.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/easyzerotechworks" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/easyzerotechworks" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/easyzerotechworks" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Web &amp; Platform Development</a></li>
+            <li><a href="#services">E-Commerce &amp; Online Business</a></li>
+            <li><a href="#services">Custom Business Systems</a></li>
+            <li><a href="#services">UI/UX Engineering</a></li>
+            <li><a href="#services">Digital Growth &amp; SEO</a></li>
+            <li><a href="#services">Automation &amp; AI</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#mission">Mission &amp; Vision</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#testimonials">Client Stories</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:0639240423">063 924 0423</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:info@easyzerotechworks.com">info@easyzerotechworks.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-globe"></i>
+              <a href="https://www.easyzerotechworks.com" target="_blank" rel="noopener">www.easyzerotechworks.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Johannesburg, Gauteng, South Africa</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="footerYear"></span> EasyZero Techworks. All rights reserved.</p>
+        <p class="footer-tagline-bottom">Your Partner in Digital Success</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    /* =====================================================
+   EasyZero Techworks — script.js
+   Handles: preloader, custom cursor, navbar scroll,
+   mobile menu, scroll reveal, counter animation,
+   FAQ accordion, contact form validation, back-to-top
+===================================================== */
+
+'use strict';
+
+// ─── DOM References ───────────────────────────────────
+const preloader    = document.getElementById('preloader');
+const cursorDot    = document.getElementById('cursorDot');
+const cursorRing   = document.getElementById('cursorRing');
+const navbar       = document.getElementById('navbar');
+const hamburger    = document.getElementById('hamburger');
+const mobileMenu   = document.getElementById('mobileMenu');
+const backToTop    = document.getElementById('backToTop');
+const contactForm  = document.getElementById('contactForm');
+const formSuccess  = document.getElementById('formSuccess');
+const footerYear   = document.getElementById('footerYear');
+
+// ─── Utility: throttle function calls ─────────────────
+function throttle(fn, ms) {
+  let last = 0;
+  return function(...args) {
+    const now = Date.now();
+    if (now - last >= ms) { last = now; fn.apply(this, args); }
+  };
+}
+
+// ─── 1. PRELOADER ──────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (preloader) {
+      preloader.classList.add('hidden');
+      // Remove from DOM after transition
+      preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+    }
+  }, 1800); // let the fill animation complete
+});
+
+// ─── 2. FOOTER YEAR ────────────────────────────────────
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+// ─── 3. CUSTOM CURSOR ──────────────────────────────────
+if (cursorDot && cursorRing && window.matchMedia('(pointer: fine)').matches) {
+  let dotX = 0, dotY = 0;
+  let ringX = 0, ringY = 0;
+  let rafId;
+
+  document.addEventListener('mousemove', (e) => {
+    dotX = e.clientX;
+    dotY = e.clientY;
+    // Dot follows immediately
+    cursorDot.style.left = dotX + 'px';
+    cursorDot.style.top  = dotY + 'px';
+  });
+
+  // Ring lags slightly via lerp
+  function animateRing() {
+    ringX += (dotX - ringX) * 0.12;
+    ringY += (dotY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top  = ringY + 'px';
+    rafId = requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Enlarge ring on interactive elements
+  const hoverTargets = 'a, button, .service-card, .faq-q, .social-btn, .back-to-top';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(hoverTargets)) cursorRing.classList.add('hovered');
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(hoverTargets)) cursorRing.classList.remove('hovered');
+  });
+
+  // Hide on leave
+  document.addEventListener('mouseleave', () => {
+    cursorDot.style.opacity = '0';
+    cursorRing.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    cursorDot.style.opacity = '1';
+    cursorRing.style.opacity = '1';
+  });
+}
+
+// ─── 4. NAVBAR: scroll state + active link ─────────────
+function handleNavbar() {
+  if (navbar) {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }
+  updateActiveNavLink();
+}
+
+function updateActiveNavLink() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+  let current = '';
+
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 100) {
+      current = sec.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', throttle(handleNavbar, 80));
+handleNavbar(); // init on load
+
+// ─── 5. MOBILE MENU ────────────────────────────────────
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    // Prevent body scroll when menu open
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close on link click
+  mobileMenu.querySelectorAll('.mob-link, .mob-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+}
+
+// ─── 6. SCROLL REVEAL ──────────────────────────────────
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger children in the same scroll event
+      const delay = entry.target.dataset.delay || 0;
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, delay);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+// Add staggered delays to sibling reveal elements inside grids
+document.querySelectorAll('.services-grid, .testimonials-grid, .mv-grid-layout').forEach(grid => {
+  const children = grid.querySelectorAll('.reveal');
+  children.forEach((child, idx) => {
+    child.dataset.delay = idx * 80;
+  });
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ─── 7. COUNTER ANIMATION ──────────────────────────────
+const counters = document.querySelectorAll('.stat-num[data-count]');
+let countersStarted = false;
+
+function animateCounters() {
+  if (countersStarted) return;
+  const heroSection = document.getElementById('hero');
+  if (!heroSection) return;
+
+  const rect = heroSection.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    countersStarted = true;
+    counters.forEach(counter => {
+      const target = parseInt(counter.dataset.count, 10);
+      const duration = 1800;
+      const step = 16;
+      const increment = target / (duration / step);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        counter.textContent = Math.floor(current);
+      }, step);
+    });
+  }
+}
+
+window.addEventListener('scroll', throttle(animateCounters, 100));
+animateCounters(); // check on load too
+
+// ─── 8. FAQ ACCORDION ──────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const answer   = btn.nextElementSibling;
+
+    // Close all others
+    document.querySelectorAll('.faq-q').forEach(other => {
+      if (other !== btn) {
+        other.setAttribute('aria-expanded', 'false');
+        const otherAnswer = other.nextElementSibling;
+        if (otherAnswer) {
+          otherAnswer.style.maxHeight = null;
+          otherAnswer.hidden = true;
+        }
+      }
+    });
+
+    // Toggle current
+    if (expanded) {
+      btn.setAttribute('aria-expanded', 'false');
+      answer.style.maxHeight = null;
+      answer.hidden = true;
+    } else {
+      btn.setAttribute('aria-expanded', 'true');
+      answer.hidden = false;
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ─── 9. CONTACT FORM VALIDATION & SUBMISSION ──────────
+if (contactForm) {
+  const fields = {
+    firstName: { label: 'First name', required: true, minLen: 2 },
+    lastName:  { label: 'Last name',  required: true, minLen: 2 },
+    email:     { label: 'Email',      required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+    service:   { label: 'Service',    required: true },
+    message:   { label: 'Message',    required: true, minLen: 20 },
+  };
+
+  function validateField(name, value) {
+    const rule = fields[name];
+    if (!rule) return null;
+    if (rule.required && !value.trim()) return `${rule.label} is required.`;
+    if (rule.minLen && value.trim().length < rule.minLen) return `${rule.label} must be at least ${rule.minLen} characters.`;
+    if (rule.pattern && !rule.pattern.test(value.trim())) return `Please enter a valid ${rule.label.toLowerCase()}.`;
+    return null;
+  }
+
+  function showError(name, message) {
+    const input = contactForm.querySelector(`#${name}, [name="${name}"]`);
+    const errorEl = input ? input.parentElement.querySelector('.form-error') : null;
+    if (input) input.classList.toggle('invalid', !!message);
+    if (errorEl) errorEl.textContent = message || '';
+  }
+
+  // Live validation
+  Object.keys(fields).forEach(name => {
+    const input = contactForm.querySelector(`#${name}, [name="${name}"]`);
+    if (!input) return;
+    input.addEventListener('blur', () => {
+      showError(name, validateField(name, input.value));
+    });
+    input.addEventListener('input', () => {
+      if (input.classList.contains('invalid')) {
+        showError(name, validateField(name, input.value));
+      }
+    });
+  });
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    Object.keys(fields).forEach(name => {
+      const input = contactForm.querySelector(`#${name}, [name="${name}"]`);
+      const error = validateField(name, input ? input.value : '');
+      showError(name, error);
+      if (error) isValid = false;
+    });
+
+    if (!isValid) return;
+
+    // Simulate form submission
+    const submitBtn = document.getElementById('formSubmit');
+    const btnText   = submitBtn.querySelector('.btn-text');
+
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    submitBtn.style.opacity = '0.7';
+
+    // Simulate async send (replace with real API call / EmailJS / Formspree)
+    setTimeout(() => {
+      contactForm.style.display = 'none';
+      formSuccess.hidden = false;
+
+      // Scroll to success message
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 1500);
+  });
+}
+
+// ─── 10. BACK TO TOP ───────────────────────────────────
+window.addEventListener('scroll', throttle(() => {
+  if (backToTop) {
+    const show = window.scrollY > 400;
+    backToTop.hidden = !show;
+  }
+}, 150));
+
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ─── 11. SMOOTH SCROLL for all anchor links ────────────
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const offset = 80; // navbar height
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+// ─── 12. SERVICE CARD: "Read more" toggle ─────────────
+// Cards initially collapse the .card-deep section on mobile for cleaner UX
+function initCardToggle() {
+  if (window.innerWidth > 768) return; // desktop: always expanded
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    const deep = card.querySelector('.card-deep');
+    if (!deep) return;
+
+    deep.style.display = 'none';
+    const toggle = document.createElement('button');
+    toggle.className = 'card-toggle';
+    toggle.textContent = 'Read more ↓';
+    toggle.style.cssText = `
+      background: none; border: none;
+      color: var(--accent); font-size: 0.83rem;
+      font-weight: 600; letter-spacing: 0.5px;
+      cursor: pointer; padding: 4px 0; margin-bottom: 4px;
+      font-family: 'Rajdhani', sans-serif;
+    `;
+    card.querySelector('.card-intro').after(toggle);
+
+    toggle.addEventListener('click', () => {
+      const visible = deep.style.display !== 'none';
+      deep.style.display = visible ? 'none' : 'block';
+      toggle.textContent = visible ? 'Read more ↓' : 'Read less ↑';
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initCardToggle);
+
+// ─── 13. ANIMATED GRID: parallax on hero grid ──────────
+const heroGrid = document.querySelector('.hero-grid');
+if (heroGrid) {
+  window.addEventListener('scroll', throttle(() => {
+    const scrolled = window.scrollY;
+    heroGrid.style.transform = `translateY(${scrolled * 0.15}px)`;
+  }, 16));
+}
+
+// ─── 14. INTERSECTION: add class to navbar links on scroll ─
+const sectionIds = ['hero','services','about','mission','process','testimonials','faq','contact'];
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+// ─── 15. PARTICLES: subtle floating dots on hero ────────
+(function createParticles() {
+  const hero = document.getElementById('hero');
+  if (!hero || window.innerWidth < 768) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = `
+    position: absolute; inset: 0; pointer-events: none;
+    z-index: 1; opacity: 0.4;
+  `;
+  hero.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+
+  function resize() {
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function initParticles() {
+    particles = Array.from({ length: 50 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.5 + 0.5,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.6 + 0.2,
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 170, 255, ${p.opacity})`;
+      ctx.fill();
+
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > W) p.dx *= -1;
+      if (p.y < 0 || p.y > H) p.dy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initParticles();
+  draw();
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+})();
+
+// ─── 16. SERVICE CARD: hover glow via mouse tracking ───
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
+    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+    card.style.background = `
+      radial-gradient(circle at ${x}% ${y}%, rgba(24,71,240,0.12), rgba(11,21,53,0.85) 60%)
+    `;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
+});
+
+console.log('%c EasyZero Techworks 🚀', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
+console.log('%c Your Partner in Digital Success', 'color: #8fa3c8; font-size: 12px;');
+
+    
+  </script>
+</body>
+</html>
