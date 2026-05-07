@@ -3,7 +3,7 @@
 Welcome to the Easyzero Techworks Website project — a modern and responsive business website built to showcase services, projects, and digital solutions offered by Easyzero Techworks.
 
 ##  Live Demo
-Add your live website link here:
+Live Demo:
 [View Website](https://easyzerotechworks.netlify.app/)
 
 ---
